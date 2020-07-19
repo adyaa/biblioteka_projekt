@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DatabaseModel.PurchaseDetailTable>
+
+@{
+    ViewBag.Title = "Dostawy > Szczegóły dostawy";
+}
+
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista użytkowników</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Tytuł książki
+                        </th>
+                        <th>
+                            Ilość
+                        </th>
+                        <th>
+                            Cena jednostkowa
+                        </th>
+                        <th>
+                            ID zamówienia
+                        </th>
+                        <th>
+                            Koszt
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTable.BookTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Qty)
+                            </td>
+                            <td>
+                                @(string.Format("{0:0.00}", Math.Truncate(item.UnitPrice *10)/10)) zł
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PurchaseTable.PurchaseID)
+                            </td>
+                            <td>
+                                @(string.Format("{0:0.00}", Math.Truncate(item.Qty * item.UnitPrice *10)/10)) zł
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

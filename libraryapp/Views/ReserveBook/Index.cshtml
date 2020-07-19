@@ -1,0 +1,72 @@
+﻿@model IEnumerable<DatabaseModel.BookTable>
+
+@{
+    ViewBag.Title = "Zarezerwuj książkę";
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista kategorii książek</h6>
+        <h3 class="text-success">@ViewBag.Message</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table-hover">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Tytuł
+                        </th>
+                        <th>
+                            Krótki opis
+                        </th>
+                        <th>
+                            Autor
+                        </th>
+                        <th>
+                            Wydawnictwo
+                        </th>
+                        <th>
+                            Edycja
+                        </th>
+                        <th>
+                            Kategoria
+                        </th>
+                        <th>
+                            Opcje
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShortDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Edition)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTypeTable.Name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Zarezerwuj", "ReserveBook", new { id = item.BookID }, new { @class = "btn btn-success" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

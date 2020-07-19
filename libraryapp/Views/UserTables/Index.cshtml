@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DatabaseModel.UserTable>
+
+@{
+    ViewBag.Title = "Użytkownicy > Lista użytkowników";
+}
+
+@Html.ActionLink("Nowy", "Create", null, new { @class = "btn btn-success" })
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista użytkowników</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Login
+                        </th>
+                        <th>
+                            Hasło
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Typ użytkownika
+                        </th>
+                        <th>
+                            Akcje
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserTypeTable.UserType)
+                        </td>
+                        <td class="btn-group">
+                            @Html.ActionLink("Edytuj", "Edit", new { id = item.UserID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Szczegóły", "Details", new { id = item.UserID }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Usuń", "Delete", new { id = item.UserID }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

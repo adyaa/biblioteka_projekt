@@ -1,0 +1,66 @@
+﻿@model DatabaseModel.BookReturnTable
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Lista zwrotów książek</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Data wydania
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueDate)
+        </dd>
+
+        <dt>
+            Data zwrotu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            Aktualna data
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentDate)
+        </dd>
+
+        <dt>
+            Tytuł książki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookTable.BookTitle)
+        </dd>
+
+        <dt>
+            ID pracownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeTable.FullName)
+        </dd>
+
+        <dt>
+            ID Użytkownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserTable.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.BookReturnID }) |
+    @Html.ActionLink("Powrót", "Index")
+</p>

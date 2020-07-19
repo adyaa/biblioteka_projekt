@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DatabaseModel.BookTypeTable>
+
+@{
+    ViewBag.Title = "Wykaz książek > Kategorie książek";
+}
+
+@Html.ActionLink("Nowy", "Create", null, new { @class = "btn btn-success" })
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista kategorii książek</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table-hover">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            ID kategorii
+                        </th>
+                        <th>
+                            Nazwa kategorii
+                        </th>
+
+                        <th>
+                            Akcje
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTypeID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td class="btn-group">
+                                @Html.ActionLink("Edytuj", "Edit", new { id = item.BookTypeID }, new { @class = "btn btn-primary" })
+                                @*@Html.ActionLink("Usuń", "Delete", new { id = item.BookTypeID }, new { @class = "btn btn-danger" })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

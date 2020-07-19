@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DatabaseModel.IssueBookTable>
+
+@{
+    ViewBag.Title = "Wykaz książek > Lista wydanych książek";
+}
+
+
+
+<p>
+    @Html.ActionLink("Nowy", "Create",null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Liczba kopii
+        </th>
+        <th>
+            Data wydania
+        </th>
+        <th>
+            Przewidywana data zwrotu
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Opis
+        </th>
+        <th>
+            Zarezerwuj liczbę kopii
+        </th>
+        <th>
+            Tytuł książki
+        </th>
+        <th>
+            ID pracownika
+        </th>
+        <th>
+            ID Użytkownika
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueCopies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReserveNoOfCopies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookTable.BookTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeTable.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserTable.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.IssueBookID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.IssueBookID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.IssueBookID })
+        </td>
+    </tr>
+}
+
+</table>

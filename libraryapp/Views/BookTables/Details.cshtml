@@ -1,0 +1,112 @@
+﻿@model DatabaseModel.BookTable
+
+@{
+    ViewBag.Title = "Wykaz książek > Szczegóły";
+}
+
+
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Tytuł książki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookTitle)
+        </dd>
+
+        <dt>
+            Krótki opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+
+        <dt>
+            Autor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            Wydawnictwo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookName)
+        </dd>
+
+        <dt>
+            Edycja
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Edition)
+        </dd>
+
+        <dt>
+            Liczba kopii
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCopies)
+        </dd>
+
+        <dt>
+            Data rejestracji
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegDate)
+        </dd>
+
+        <dt>
+            Cena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            Opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Kategoria książki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookTypeTable.Name)
+        </dd>
+
+        <dt>
+            Dział biblioteki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentTable.Name)
+        </dd>
+
+        <dt>
+            ID Użytkownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserTable.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.BookID }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-primary" })
+</p>

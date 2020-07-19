@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DatabaseModel.BookFineTable>
+
+@{
+    ViewBag.Title = "Płatności > Historia płatności";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Historia płatności</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+
+                        <th>
+                            Użytkownik
+                        </th>
+                        <th>
+                            Tytuł książki
+                        </th>
+                        <th>
+                            Pracownik
+                        </th>
+                        <th>
+                            Data naliczenia
+                        </th>
+                        <th>
+                            Liczba dni
+                        </th>
+                        <th>
+                            Kwota za dzień
+                        </th>
+                        <th>
+                            Kwota łączna
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserTable.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTable.BookTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeTable.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FineDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NoOfDays)
+                            </td>
+                            <td>
+                                2 zł
+                            </td>
+                            <td>
+                                @(string.Format("{0:0.00}", Math.Truncate(item.FineAmount * 10)/10)) zł
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

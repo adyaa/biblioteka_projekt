@@ -1,0 +1,40 @@
+﻿@model DatabaseModel.BookTypeTable
+
+@{
+    ViewBag.Title = "Kategorie książki > usuń";
+}
+
+
+
+<h3>Jesteś pewny, że chcesz usunąć wybrana kategorię książek?</h3>
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Kategoria książki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            ID Użytkownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót", "Index")
+        </div>
+    }
+</div>

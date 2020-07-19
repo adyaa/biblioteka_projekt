@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DatabaseModel.IssueBookTable>
+
+@{
+    ViewBag.Title = "Wypożyczenia > Książki po terminie";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Zbliżające się terminy zwrotu</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table-hover">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Tytuł książki
+                        </th>
+                        <th>
+                            Pracownik
+                        </th>
+                        <th>
+                            Liczba kopii
+                        </th>
+                        <th>
+                            Data wypożyczenia
+                        </th>
+                        <th>
+                            Data zwrotu
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Użytkownik
+                        </th>
+                        <th>Opcje</th>
+                    </tr>
+                    </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTable.BookTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeTable.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IssueCopies)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IssueDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReturnDate)
+                            </td>
+                            <td class="btn-group-justified">
+                                <p class="btn btn-danger disabled" style="font:bold">Przekroczona data zwrotu!</p>
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserTable.UserName)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Zwróć książkę", "BookReturn", new { id = item.IssueBookID }, new { @class = "btn btn-primary" })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DatabaseModel.SupplierTable>
+
+@{ ViewBag.Title = "Dostawcy"; }
+
+<p>
+    @Html.ActionLink("Nowy dostawca", "Create", null, new { @class = "btn btn-success" })
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista dostawców</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table-hover">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Nazwa dostawcy
+                        </th>
+                        <th>
+                            Numer kontaktowy
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Opis
+                        </th>
+                        <th>
+                            Nazwa użytkownika
+                        </th>
+                        <th>Opcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserTable.UserName)
+            </td>
+            <td class="btn-group">
+                @Html.ActionLink("Edycja", "Edit", new { id = item.SupplierID }, new { @class = "btn btn-primary" })
+
+            </td>
+        </tr>}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>

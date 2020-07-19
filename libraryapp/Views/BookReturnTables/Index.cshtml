@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DatabaseModel.BookReturnTable>
+
+@{
+    ViewBag.Title = "Wykaz książek > Lista zwrotów książek";
+}
+
+
+<p>
+    @Html.ActionLink("Nowy", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Data wydania
+        </th>
+        <th>
+            Data zwrotu
+        </th>
+        <th>
+            Aktualna data
+        </th>
+        <th>
+            Tytuł książki
+        </th>
+        <th>
+            ID pracownika
+        </th>
+        <th>
+            ID Użytkownika
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookTable.BookTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeTable.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserTable.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.BookReturnID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.BookReturnID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.BookReturnID })
+        </td>
+    </tr>
+}
+
+</table>

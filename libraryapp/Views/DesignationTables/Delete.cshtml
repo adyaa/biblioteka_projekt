@@ -1,0 +1,46 @@
+﻿@model DatabaseModel.DesignationTable
+
+@{
+    ViewBag.Title = "Typ oznaczenia > Usuń";
+}
+
+
+<h3>Czy jesteś pewny że chcesz usunąć wybrane oznaczenie?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nazwa oznaczenia
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Numer oznaczenia
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scale)
+        </dd>
+
+        <dt>
+           ID Użytkownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserTable.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Usuń" class="btn btn-danger" />
+    @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-info" })
+</div>
+    }
+</div>

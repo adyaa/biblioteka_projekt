@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DatabaseModel.BookReturnTable>
+
+@{
+    ViewBag.Title = "Zwroty > Historia zwrotów";
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista zwrotów książek</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Tytuł książki
+                        </th>
+                        <th>
+                            Kto wypożyczył
+                        </th>
+                        <th>
+                            Pracownik
+                        </th>
+                        <th>
+                            Data wypożyczenia
+                        </th>
+                        <th>
+                            Przewidywana data zwrotu
+                        </th>
+                        <th>
+                            Data zwrócenia
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookTable.BookTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserTable.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeTable.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReturnDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CurrentDate)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

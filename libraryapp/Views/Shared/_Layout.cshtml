@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Aplikacja biblioteczna</title>
+
+    <link href="~/Content/AdminTemplate/css.css" rel="stylesheet" />
+    <link href="~/Content/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+
+    <div id="wrapper">
+        @{ int usertypeid = 0;
+            if (Session["UserID"] != null)
+            {
+                usertypeid = Convert.ToInt32(Convert.ToString(Session["UserID"]));
+            }
+        }
+        @if (usertypeid == 1)
+        {
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Wirtualna biblioteka</div>
+                </a>
+
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Książki
+                </div>
+
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePC" aria-expanded="true" aria-controls="collapsePC">
+                        <i class="fa fa-truck" aria-hidden="true"></i>
+                        <span>Dostawy</span>
+                    </a>
+                    <div id="collapsePC" class="collapse" aria-labelledby="headingPC" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @Html.ActionLink("Dostawcy", "Index", "SupplierTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Nowa dostawa", "NewPurchase", "Purchase", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Historia dostaw", "AllPurchase", "Purchase", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBooks" aria-expanded="true" aria-controls="collapseBooks">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <span>Wykaz książek</span>
+                    </a>
+                    <div id="collapseBooks" class="collapse" aria-labelledby="headingBooks" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Kategorie książek</h6>
+                            @Html.ActionLink("Kategorie", "Index", "BookTypeTables", null, new { @class = "collapse-item" })
+                            <h6 class="collapse-header">Rejestracja książek</h6>
+                            @Html.ActionLink("Nowa książka", "Create", "BookTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Lista książek", "Index", "BookTables", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseIssue" aria-expanded="true" aria-controls="collapseIssue">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        <span>Wypożyczenia</span>
+                    </a>
+                    <div id="collapseIssue" class="collapse" aria-labelledby="headingBooks" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Wypożyczanie książek</h6>
+                            @Html.ActionLink("Wypożycz / zarezerwuj", "Create", "IssueBookTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Historia wypożyczeń", "IssueBooks", "IssueBookTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Historia rezerwacji", "ReserveBooks", "IssueBookTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Po terminie zwrotu", "ReturnPendingBooks", "IssueBookTables", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReturn" aria-expanded="true" aria-controls="collapseReturn">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        <span>Zwroty</span>
+                    </a>
+                    <div id="collapseReturn" class="collapse" aria-labelledby="headingBooks" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Zwrot książek</h6>
+                            @Html.ActionLink("Lista zwróconych", "Index", "ReturnBooks", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFine" aria-expanded="true" aria-controls="collapseFine">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                        <span>Płatności</span>
+                    </a>
+                    <div id="collapseFine" class="collapse" aria-labelledby="headingBooks" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Nowa płatność</h6>
+                            @Html.ActionLink("Zatwierdź płatność", "PendingFine", "BookFine", null, new { @class = "collapse-item" })
+                            <h6 class="collapse-header">Lista płatności</h6>
+                            @Html.ActionLink("Historia płatności", "FineHistory", "BookFine", null, new { @class = "collapse-item" })
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Ustawienia
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Ustawienia</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Typ konta</h6>
+                            @Html.ActionLink("Typy użytkowników", "Index", "UserTypeTables", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Oznaczenia</h6>
+                            @Html.ActionLink("Typy oznaczeń", "Index", "DesignationTables", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Działy</h6>
+                            @Html.ActionLink("Działy biblioteki", "Index", "DepartmentTables", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                        </div>
+                    </div>
+
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBC" aria-expanded="true" aria-controls="collapseBC">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        <span>Użytkownicy</span>
+                    </a>
+                    <div id="collapseBC" class="collapse" aria-labelledby="headingBC" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Dodaj:</h6>
+                            @Html.ActionLink("Nowy użytkownik", "Create", "UserTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Nowy pracownik", "Create", "EmployeeTables", null, new { @class = "collapse-item" })
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Lista:</h6>
+                            @Html.ActionLink("Użytkownicy", "Index", "UserTables", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Pracownicy", "Index", "EmployeeTables", null, new { @class = "collapse-item" })
+
+                        </div>
+                    </div>
+                </li>
+
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+
+            </ul>
+        }
+            <!-- End of Sidebar -->
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <!-- Topbar Search -->
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Szukaj" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small" placeholder="Szukaj" aria-label="Search" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">MOJE KONTO</span>
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profil
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Ustawienia
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Aktywność
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Wyloguj
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">@ViewBag.Title</h1>
+
+                        </div>
+                        @RenderBody()
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Moja biblioteka 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Czy na pewno chcesz opuścić stronę?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Wybierz przycisk "Wyloguj" jeśli zakończyłeś sesję.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Anuluj</button>
+                        @Html.ActionLink("Wyloguj", "Logout", "Home", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/Content/AdminTemplate/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="~/Content/AdminTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="~/Content/AdminTemplate/js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="~/Content/AdminTemplate/vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="~/Content/AdminTemplate/js/demo/chart-area-demo.js"></script>
+        <script src="~/Content/AdminTemplate/js/demo/chart-pie-demo.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="~/Content/AdminTemplate/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="~/Content/AdminTemplate/js/demo/datatables-demo.js"></script>
+
+    </body>
+
+</html>
+

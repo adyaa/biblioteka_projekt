@@ -1,0 +1,27 @@
+﻿@model DatabaseModel.UserTypeTable
+
+
+@{
+    ViewBag.Title = "Typ użytkownika > Szczegóły";
+}
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Typ użytkownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.UserTypeID }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-primary" })
+</p>
+
+

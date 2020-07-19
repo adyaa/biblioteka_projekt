@@ -1,0 +1,88 @@
+﻿@model DatabaseModel.IssueBookTable
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<div>
+    <h4>Lista wydanych książek</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Liczba kopii
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueCopies)
+        </dd>
+
+        <dt>
+            Data wydania
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueDate)
+        </dd>
+
+        <dt>
+            Data zwrotu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            Opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Zarezerwuj liczbę kopii
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReserveNoOfCopies)
+        </dd>
+
+        <dt>
+            Tytuł książki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookTable.BookTitle)
+        </dd>
+
+        <dt>
+            ID pracownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeTable.FullName)
+        </dd>
+
+        <dt>
+            ID Użytkownika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserTable.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.IssueBookID }) |
+    @Html.ActionLink("Powrót", "Index")
+</p>
